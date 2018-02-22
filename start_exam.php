@@ -8,7 +8,10 @@ $examdetails = mysql_fetch_array(mysql_query("select * from exams where sno = '$
 $questions = $examdetails['questions'];
 $questions = split('~',$questions);
 $_SESSION['sno'] = $examdetails['sno'];
-$uname = $_SESSION['normal_user'];
+if(isset($_SESSION['normal_user']))
+  $uname = $_SESSION['normal_user'];
+else if(isset($_SESSION['admin_user']))
+$uname = $_SESSION['admin_user'];
 ?>   
     
 <div class="main">
@@ -20,7 +23,11 @@ $uname = $_SESSION['normal_user'];
     	<div class="row">
     	<div class="span12">
 						
-				<div class="widget widget-plain">
+				<div class="widget widget-plain" style="background-color:gray;color:#fff">
+          <span>Total Questions:<?php echo $examdetails['number']; ?> </span>
+          <span>Total Time:<?php echo $examdetails['examtime']; ?> </span>
+          <span>Marks for Correct Answer:<?php echo $examdetails['marks']; ?> </span>
+          <span>Marks for Wrong Answer:<?php echo $examdetails['nmarks']; ?> </span>
 				</div> <!-- /widget -->
 				
 				

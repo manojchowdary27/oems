@@ -10,6 +10,17 @@ else
 $uname = $_SESSION['admin_user'];
 
 ?>
+<script type="text/javascript">
+  function start_exam(eid){
+    var res = confirm('Are You Sure? Clicking Yes will start the exam');
+    if(res){
+      window.location.href="./start_exam.php?sno="+eid;
+    }
+    else{
+      console.log("exam cancelled");
+    }
+  }
+</script>
 <div class="main">
   <div class="main-inner">
     <div class="container">
@@ -52,7 +63,7 @@ $uname = $_SESSION['admin_user'];
                     <td class="td-actions">
 					
 						<?php $q = mysql_fetch_array(mysql_query("select count(*) as cou from logs where examsno='$sno' and username='$uname' ")) or die(mysql_error());
-					if($q['cou']>=1) {	?>				<a href="start_exam.php?sno=<?php echo $fetchrow['sno'];?>" class="btn btn-small btn-primary"><i class="btn-icon-only icon-ok"> </i>Taken</a></td> <?php } else { ?>	
+					if($q['cou']>=1) {	?>				<a href="#" onclick = "start_exam(<?php echo $fetchrow['sno'];?>)" class="btn btn-small btn-primary"><i class="btn-icon-only icon-ok"> </i>Taken</a></td> <?php } else { ?>	
 						
 						<a href="start_exam.php?sno=<?php echo $fetchrow['sno'];?>" class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i>Start</a></td>
 					<?php } ?>
